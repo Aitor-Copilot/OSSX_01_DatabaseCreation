@@ -1,4 +1,5 @@
-package main.java.com.example;
+package com.example;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -64,14 +65,13 @@ public class JsonToAccess {
     // 2️⃣  Helper: INSERT into Applications
     // -------------------------------------------------------------------
     private static void insertApplication(Connection conn, JsonNode app) throws SQLException {
-        String sql = """
-                INSERT INTO Applications
-                (application_id, id, application_type_id, cached_last_update, decision_date,
-                 project_name, submission, project_manager, assuror, decision_maker,
-                 modified, application_type, application_type_variant_version, case_type,
-                 completeness_acknowledgement, issuing_authority, ein, legal_denomination,
-                 application_status, phase, subcategory, is_whole_eu, pre_engaged)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""";
+        String sql = "INSERT INTO Applications "
+                + "(application_id, id, application_type_id, cached_last_update, decision_date, "
+                + "project_name, submission, project_manager, assuror, decision_maker, "
+                + "modified, application_type, application_type_variant_version, case_type, "
+                + "completeness_acknowledgement, issuing_authority, ein, legal_denomination, "
+                + "application_status, phase, subcategory, is_whole_eu, pre_engaged) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, app.get("applicationId").asText());
